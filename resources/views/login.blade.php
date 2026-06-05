@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('title', 'Iniciar sesión')
-@section('hide-navbar')@endsection
 
 @section('content')
 <div class="min-h-[70vh] flex items-center justify-center">

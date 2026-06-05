@@ -13,6 +13,47 @@
         </div>
 
         <div class="bg-white rounded shadow">
+    <!-- Filtros y ordenamiento para desktop -->
+        <div class="hidden md:block p-4 border-b border-gray-200">
+            <form method="GET" action="{{ request()->url() }}" class="flex items-center gap-3 flex-wrap">
+                <input name="q" value="{{ request('q') }}" placeholder="Buscar cliente" class="px-3 py-2 rounded border border-gray-300 bg-white text-gray-900 text-sm w-1/3" />
+
+                <select name="marca" class="px-3 py-2 rounded border border-gray-300 bg-white text-gray-900 text-sm w-1/6">
+                    <option value="">Todas marcas</option>
+                    @foreach($marcas as $marca)
+                        <option value="{{ $marca }}" {{ request('marca') === $marca ? 'selected' : '' }}>{{ $marca }}</option>
+                    @endforeach
+                </select>
+
+                <select name="estado" class="px-3 py-2 rounded border border-gray-300 bg-white text-gray-900 text-sm w-1/6">
+                    <option value="">Todos estados</option>
+                    @foreach($estados as $estadoOpt)
+                        <option value="{{ $estadoOpt }}" {{ request('estado') === $estadoOpt ? 'selected' : '' }}>{{ $estadoOpt }}</option>
+                    @endforeach
+                </select>
+
+                <select name="sort" class="px-3 py-2 rounded border border-gray-300 bg-white text-gray-900 text-sm">
+                    <option value="">Ordenar por...</option>
+                    <option value="id" {{ request('sort') === 'id' ? 'selected' : '' }}>#</option>
+                    <option value="nombre_cliente" {{ request('sort') === 'nombre_cliente' ? 'selected' : '' }}>Cliente</option>
+                    <option value="marca_celular" {{ request('sort') === 'marca_celular' ? 'selected' : '' }}>Marca</option>
+                    <option value="modelo_celular" {{ request('sort') === 'modelo_celular' ? 'selected' : '' }}>Modelo</option>
+                    <option value="fecha_ingreso" {{ request('sort') === 'fecha_ingreso' ? 'selected' : '' }}>Fecha ingreso</option>
+                    <option value="estado" {{ request('sort') === 'estado' ? 'selected' : '' }}>Estado</option>
+                </select>
+
+                <select name="direction" class="px-3 py-2 rounded border border-gray-300 bg-white text-gray-900 text-sm w-24">
+                    <option value="desc" {{ request('direction') === 'desc' ? 'selected' : '' }}>Desc</option>
+                    <option value="asc" {{ request('direction') === 'asc' ? 'selected' : '' }}>Asc</option>
+                </select>
+
+                <div class="flex items-center gap-2">
+                    <button type="submit" class="px-3 py-2 bg-blue-600 text-white rounded">Filtrar</button>
+                    <a href="{{ route('repairs.index') }}" class="text-sm text-gray-600 hover:underline">Reset</a>
+                </div>
+            </form>
+        </div>
+
     <!-- Tabla para desktop -->
         @php
             $currentSort = request('sort');
@@ -143,6 +184,51 @@
 
     <!-- Tarjetas para móvil -->
         <div class="md:hidden p-4 space-y-4">
+            {{-- Mobile: filters & sort form --}}
+            <form method="GET" action="{{ request()->url() }}" class="space-y-2">
+                <div class="flex gap-2">
+                    <input name="q" value="{{ request('q') }}" placeholder="Buscar cliente" class="flex-1 w-full px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white text-gray-900 text-sm" />
+                    <button type="submit" class="px-3 py-2 bg-blue-600 text-white rounded">Filtrar</button>
+                </div>
+
+                <div class="flex gap-2">
+                    <select name="marca" class="w-1/2 px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white text-gray-900 text-sm">
+                        <option value="">Todas marcas</option>
+                        @foreach($marcas as $marca)
+                            <option value="{{ $marca }}" {{ request('marca') === $marca ? 'selected' : '' }}>{{ $marca }}</option>
+                        @endforeach
+                    </select>
+
+                    <select name="estado" class="w-1/2 px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white text-gray-900 text-sm">
+                        <option value="">Todos estados</option>
+                        @foreach($estados as $estadoOpt)
+                            <option value="{{ $estadoOpt }}" {{ request('estado') === $estadoOpt ? 'selected' : '' }}>{{ $estadoOpt }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="flex gap-2">
+                    <select name="sort" class="flex-1 px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white text-gray-900 text-sm">
+                        <option value="">Ordenar por...</option>
+                        <option value="id" {{ request('sort') === 'id' ? 'selected' : '' }}>#</option>
+                        <option value="nombre_cliente" {{ request('sort') === 'nombre_cliente' ? 'selected' : '' }}>Cliente</option>
+                        <option value="marca_celular" {{ request('sort') === 'marca_celular' ? 'selected' : '' }}>Marca</option>
+                        <option value="modelo_celular" {{ request('sort') === 'modelo_celular' ? 'selected' : '' }}>Modelo</option>
+                        <option value="fecha_ingreso" {{ request('sort') === 'fecha_ingreso' ? 'selected' : '' }}>Fecha ingreso</option>
+                        <option value="estado" {{ request('sort') === 'estado' ? 'selected' : '' }}>Estado</option>
+                    </select>
+
+                    <select name="direction" class="w-1/3 px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white text-gray-900 text-sm">
+                        <option value="desc" {{ request('direction') === 'desc' ? 'selected' : '' }}>Desc</option>
+                        <option value="asc" {{ request('direction') === 'asc' ? 'selected' : '' }}>Asc</option>
+                    </select>
+                </div>
+
+                <div class="flex gap-2">
+                    <a href="{{ route('repairs.index') }}" class="text-sm text-gray-600 hover:underline">Reset</a>
+                </div>
+            </form>
+
             @forelse($repairs as $repair)
                 <div class="bg-white border rounded-lg p-4 shadow-sm">
                     <div class="flex items-start justify-between">

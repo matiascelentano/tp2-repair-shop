@@ -16,6 +16,19 @@ class RepairController extends Controller
         $direction = request('direction') === 'asc' ? 'asc' : 'desc';
 
         $query = Repair::query();
+        // Filters
+        $q = request('q');
+        if ($q) {
+            $query->where('nombre_cliente', 'like', "%{$q}%");
+        }
+        $estadoFilter = request('estado');
+        if ($estadoFilter && in_array($estadoFilter, Repair::ESTADOS)) {
+            $query->where('estado', $estadoFilter);
+        }
+        $marcaFilter = request('marca');
+        if ($marcaFilter) {
+            $query->where('marca_celular', $marcaFilter);
+        }
         if ($sort && in_array($sort, $allowed)) {
             $query->orderBy($sort, $direction);
         } else {
@@ -23,7 +36,12 @@ class RepairController extends Controller
         }
 
         $repairs = $query->paginate(10)->onEachSide(1)->withQueryString();
-        return view('index', compact('repairs'));
+
+        // For filters UI
+        $marcas = Repair::select('marca_celular')->distinct()->orderBy('marca_celular')->pluck('marca_celular');
+        $estados = Repair::ESTADOS;
+
+        return view('index', compact('repairs', 'marcas', 'estados'));
     }
 
     /**

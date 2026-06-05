@@ -11,7 +11,18 @@ class RepairController extends Controller
      */
     public function index()
     {
-        $repairs = Repair::all();
+        $allowed = ['id','nombre_cliente','marca_celular','modelo_celular','fecha_ingreso','estado','created_at'];
+        $sort = request('sort');
+        $direction = request('direction') === 'asc' ? 'asc' : 'desc';
+
+        $query = Repair::query();
+        if ($sort && in_array($sort, $allowed)) {
+            $query->orderBy($sort, $direction);
+        } else {
+            $query->latest();
+        }
+
+        $repairs = $query->paginate(10)->onEachSide(1)->withQueryString();
         return view('index', compact('repairs'));
     }
 

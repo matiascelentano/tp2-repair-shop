@@ -9,6 +9,8 @@
 <body class="bg-gray-100 min-h-screen">
 
     {{-- Navbar --}}
+    @hasSection('hide-navbar')
+    @else
     <nav class="bg-blue-700 text-white px-8 py-4 flex justify-between items-center shadow">
         <a href="{{ route('repairs.index') }}" class="text-xl font-bold tracking-wide">
             🔧 RepairShop
@@ -16,8 +18,15 @@
         <div class="flex gap-4 text-sm">
             <a href="{{ route('repairs.index') }}" class="hover:underline">Reparaciones</a>
             <a href="{{ route('repairs.create') }}" class="hover:underline">+ Nueva</a>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="hover:underline">
+                    Cerrar sesión
+                </button>
+            </form>
         </div>
     </nav>
+    @endif
 
     {{-- Mensajes de éxito --}}
     @if(session('success'))

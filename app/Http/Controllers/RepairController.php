@@ -39,7 +39,7 @@ class RepairController extends Controller
         ]);
 
         Repair::create($request->all());
-        return redirect()->route('index');
+        return redirect()->route('repairs.index');
     }
 
     /**
@@ -77,7 +77,7 @@ class RepairController extends Controller
 
         $repair = Repair::findOrFail($id);
         $repair->update($request->all());
-        return redirect()->route('index');
+        return redirect()->route('repairs.index');
     }
 
     /**
@@ -87,6 +87,6 @@ class RepairController extends Controller
     {
         $repair = Repair::findOrFail($id);
         $repair->delete();
-        return redirect()->route('index');
+        return redirect()->route('repairs.index');
     }
 }

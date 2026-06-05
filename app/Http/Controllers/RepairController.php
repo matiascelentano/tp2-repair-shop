@@ -89,4 +89,10 @@ class RepairController extends Controller
         $repair->delete();
         return redirect()->route('repairs.index');
     }
+
+    public function audits(Repair $repair)
+    {
+        $audits = $repair->audits()->with('user')->latest()->get();
+        return view('audits', compact('repair', 'audits'));
+    }
 }

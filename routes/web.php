@@ -11,4 +11,5 @@ Route::post('/login', [AuthController::class, 'login'])->middleware('guest');
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::resource('repairs', RepairController::class);
+    Route::get('repairs/{repair}/audits', [RepairController::class, 'audits'])->name('repairs.audits');
 });

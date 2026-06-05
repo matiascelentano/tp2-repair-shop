@@ -21,5 +21,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+        // Seed repairs
+        $this->call(RepairSeeder::class);
     }
 }

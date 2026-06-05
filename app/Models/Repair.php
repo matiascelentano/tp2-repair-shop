@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Repair extends Model
 {
+    use HasFactory;
     protected $fillable = [
         'nombre_cliente',
         'marca_celular',
@@ -41,6 +43,6 @@ class Repair extends Model
             }
         });
     }
-};
+}
         
 

@@ -1,7 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RepairController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('repairs.index');
 });
+
+Route::resource('repairs', RepairController::class);

@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
+use App\Models\Repair;       
 
 class RepairController extends Controller
 {
@@ -12,7 +12,7 @@ class RepairController extends Controller
     public function index()
     {
         $repairs = Repair::all();
-        return view('test', compact('repairs'));
+        return view('index', compact('repairs'));
     }
 
     /**
@@ -21,7 +21,7 @@ class RepairController extends Controller
     public function create()
     {
         $estados = Repair::ESTADOS;
-        return view('test', compact('estados'));
+        return view('create', compact('estados'));
     }
 
     /**
@@ -39,7 +39,7 @@ class RepairController extends Controller
         ]);
 
         Repair::create($request->all());
-        return redirect()->route('test');
+        return redirect()->route('index');
     }
 
     /**
@@ -48,7 +48,7 @@ class RepairController extends Controller
     public function show(string $id)
     {
         $repair = Repair::findOrFail($id);
-        return view('test', compact('repair'));
+        return view('show', compact('repair'));
     }
 
     /**
@@ -58,7 +58,7 @@ class RepairController extends Controller
     {
         $estados = Repair::ESTADOS;
         $repair = Repair::findOrFail($id);
-        return view('test', compact('repair', 'estados'));
+        return view('edit', compact('repair', 'estados'));
     }
 
     /**
@@ -77,7 +77,7 @@ class RepairController extends Controller
 
         $repair = Repair::findOrFail($id);
         $repair->update($request->all());
-        return redirect()->route('test');
+        return redirect()->route('index');
     }
 
     /**
@@ -87,6 +87,6 @@ class RepairController extends Controller
     {
         $repair = Repair::findOrFail($id);
         $repair->delete();
-        return redirect()->route('test');
+        return redirect()->route('index');
     }
 }

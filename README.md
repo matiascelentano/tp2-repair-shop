@@ -13,7 +13,7 @@ Proyecto Laravel para gestionar reparaciones y su historial de auditoría.
 1. Clonar el repositorio y entrar en la carpeta del proyecto:
 
 ```bash
-git clone <repo-url> repair-shop
+git clone https://github.com/matiascelentano/tp2-repair-shop repair-shop
 cd repair-shop
 ```
 

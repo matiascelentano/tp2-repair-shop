@@ -35,7 +35,7 @@ class RepairController extends Controller
             $query->latest();
         }
 
-        $repairs = $query->paginate(10)->onEachSide(1)->withQueryString();
+        $repairs = $query->simplePaginate(10)->withQueryString();
 
         // For filters UI
         $marcas = Repair::select('marca_celular')->distinct()->orderBy('marca_celular')->pluck('marca_celular');

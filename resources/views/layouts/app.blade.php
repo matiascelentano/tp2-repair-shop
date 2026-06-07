@@ -10,7 +10,7 @@
 
     {{-- Navbar --}}
    @auth
-   <nav class="bg-blue-700 text-white px-8 py-4 flex justify-between items-center shadow">
+   <nav class="bg-indigo-900 text-white px-8 py-4 flex justify-between items-center shadow">
        <a href="{{ route('repairs.index') }}" class="text-xl font-bold tracking-wide">
            🔧 RepairShop
        </a>

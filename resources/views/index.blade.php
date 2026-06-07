@@ -7,7 +7,7 @@
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-3xl font-bold text-gray-800">Reparaciones</h1>
             <a href="{{ route('repairs.create') }}"
-               class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+               class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">
                 + Nueva Reparación
             </a>
         </div>
@@ -48,7 +48,7 @@
                 </select>
 
                 <div class="flex items-center gap-2">
-                    <button type="submit" class="px-3 py-2 bg-blue-600 text-white rounded">Filtrar</button>
+                    <button type="submit" class="px-3 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">Filtrar</button>
                     <a href="{{ route('repairs.index') }}" class="text-sm text-gray-600 hover:underline">Reset</a>
                 </div>
             </form>

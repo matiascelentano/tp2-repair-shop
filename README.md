@@ -45,6 +45,21 @@ php artisan migrate --seed
 php artisan serve --host=127.0.0.1 --port=8000
 ```
 
+**Cómo iniciar sesión**
+
+- Asegúrate de haber ejecutado las migraciones y seeders (`php artisan migrate --seed`).
+- Arranca la aplicación (`php artisan serve`) y abre `http://127.0.0.1:8000/login` en el navegador. La ruta principal redirige a `repairs.index` y requiere autenticación.
+- Credenciales de prueba incluidas en el seeder:
+	- **Usuario 1:** `test@example.com` / `123456`
+	- **Usuario 2:** `second@example.com` / `123456`
+- No hay registro público en la app: para crear usuarios adicionales usa `DatabaseSeeder` ([database/seeders/DatabaseSeeder.php](database/seeders/DatabaseSeeder.php)) o crea uno con Tinker:
+
+```bash
+php artisan tinker
+User::factory()->create(['name'=>'Nuevo','email'=>'nuevo@example.com','password'=>bcrypt('secret')]);
+```
+
+
 **Funcionalidades principales**
 - **Autenticación:** inicio de sesión y gestión básica de usuarios (ver [resources/views/login.blade.php](resources/views/login.blade.php)).
 - **CRUD de reparaciones:** crear, listar, editar y eliminar reparaciones (vistas en [resources/views/*.blade.php](resources/views)).

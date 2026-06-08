@@ -8,7 +8,7 @@ Proyecto Laravel para gestionar reparaciones y su historial de auditoría.
 - **Node.js & npm**
 - Base de datos compatible con Laravel (MySQL, PostgreSQL, SQLite)
 
-**Instalación local (rápida)**
+**Instalación local**
 
 1. Clonar el repositorio y entrar en la carpeta del proyecto:
 
